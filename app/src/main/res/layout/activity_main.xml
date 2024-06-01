@@ -20,7 +20,9 @@
         android:id="@+id/trivia_LAY_heartLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
+        android:layout_margin="20dp"
+        android:paddingTop="20dp"
+
         android:orientation="horizontal">
 
         <androidx.appcompat.widget.AppCompatImageView
@@ -79,9 +81,10 @@
         android:gravity="center"
         android:textColor="#ffffff"
         android:text="000"/>
-    
-    
-    <LinearLayout
+
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+
         android:id="@+id/playing_surface"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -92,7 +95,8 @@
         android:orientation="horizontal"
         android:layout_weight="1">
 
-        <LinearLayout
+        <androidx.appcompat.widget.LinearLayoutCompat
+
             android:id="@+id/main_layout1"
             android:layout_width="0dp"
             android:layout_weight="1"
@@ -116,7 +120,6 @@
                 android:layout_weight="1"/>
 
 
-
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/main_IMG30"
                 android:layout_width="match_parent"
@@ -135,14 +138,16 @@
 
 
             <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/main_IMG60"
+                android:id="@+id/main_player1"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1"/>
+                android:layout_weight="1"
+                android:src="@drawable/policeman"
+                android:visibility="invisible"/>
 
-        </LinearLayout>
+        </androidx.appcompat.widget.LinearLayoutCompat>
 
-    <LinearLayout
+        <androidx.appcompat.widget.LinearLayoutCompat
         android:id="@+id/main_layout2"
         android:layout_width="0dp"
         android:layout_weight="1"
@@ -180,13 +185,13 @@
             android:layout_weight="1"/>
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/main_IMG61"
+            android:id="@+id/main_player2"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
             android:src="@drawable/policeman"/>
 
-    </LinearLayout>
+        </androidx.appcompat.widget.LinearLayoutCompat>
 
 
         <LinearLayout
@@ -228,14 +233,16 @@
                 android:layout_height="0dp"
                 android:layout_weight="1"/>
             <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/main_IMG62"
+                android:id="@+id/main_player3"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1"/>
+                android:layout_weight="1"
+                android:src="@drawable/policeman"
+                android:visibility="invisible"/>
         </LinearLayout>
 
 
-    </LinearLayout>
+    </androidx.appcompat.widget.LinearLayoutCompat>
     
     
     

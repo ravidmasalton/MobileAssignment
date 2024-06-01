@@ -3,7 +3,6 @@ package com.example.mobileassignment;
 import java.util.ArrayList;
 
 public class GameManager {
-    private ArrayList<Integer>matSurface=new ArrayList<Integer>();
     private int lives = 3;
     private int score = 0;
     private int currunt_location_User;
@@ -11,7 +10,7 @@ public class GameManager {
     private final int COLUMN=3;
 
 
-    public GameManager(int initialLives) {
+    public GameManager(int initialLives,int length) {
         if (initialLives > 0  &&  initialLives <= 4) {
             lives = initialLives;
         }
@@ -19,6 +18,15 @@ public class GameManager {
             lives=3;
 
         currunt_location_User=COLUMN/2;
+    }
+
+    public void setNewLocation(int direction){
+       if(direction==1)
+           moveLocationRight();
+       else
+           moveLocationLeft();
+
+
     }
 
     public void moveLocationRight(){
@@ -61,9 +69,6 @@ public class GameManager {
         return score;
     }
 
-    public int getNumOfQuestions() {
-        return matSurface.size();
-    }
 
 
     public void addExtraLive() {
