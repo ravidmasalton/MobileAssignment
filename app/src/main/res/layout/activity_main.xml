@@ -194,7 +194,7 @@
         </androidx.appcompat.widget.LinearLayoutCompat>
 
 
-        <LinearLayout
+        <androidx.appcompat.widget.LinearLayoutCompat
             android:id="@+id/main_layout3"
             android:layout_width="0dp"
             android:layout_weight="1"
@@ -239,7 +239,33 @@
                 android:layout_weight="1"
                 android:src="@drawable/policeman"
                 android:visibility="invisible"/>
-        </LinearLayout>
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/main_layout4"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/main_IMG0888"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/main_IMG8114"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/main_IMG224"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+
 
 
     </androidx.appcompat.widget.LinearLayoutCompat>
