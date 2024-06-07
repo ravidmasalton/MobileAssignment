@@ -7,7 +7,7 @@ public class GameManager {
     private int lives = 3;
     private int score = 0;
     private int currunt_location_User;
-    private final int ROW=6; //row-1 because the line of the player
+    private final int ROW=7; //row-1 because the line of the player
     private final int COLUMN=3;
     private Random random = new Random();
     private ArrayList<Integer>all_mine=new ArrayList<>();
@@ -47,6 +47,10 @@ public class GameManager {
             currunt_location_User-=1;
     }
         public  ArrayList<Integer> Update_mines(){
+            for(int i=0;i<COLUMN;i++){
+                all_mine.set((ROW-1)*COLUMN+i,0);
+
+            }
             for (int i = ROW-2; i >= 0; i--) {
                 for (int j = 0; j < COLUMN; j++) {
                     // If the current cell has a 1 and the cell below is 0
@@ -68,17 +72,18 @@ public class GameManager {
         }
 
         public boolean checkCollision(){
-        boolean collision=false;
-            if(all_mine.get((ROW-1)*COLUMN+this.currunt_location_User)==1) {
-                decreaseLive();
-                collision=true;
-            }
-            for(int i=0;i<COLUMN;i++)
-            {
-                all_mine.set((ROW-1)*COLUMN+i,0);
+            if(all_mine.get((ROW-1)*COLUMN+this.currunt_location_User)==1)
+                return true;
+            return  false;
 
-            }
-            return  collision;
+        }
+
+        public void actionCollision(){
+                all_mine.set((ROW-1)*COLUMN+this.currunt_location_User,0);
+                decreaseLive();
+                decreasetScore();
+
+
         }
 
     public void Adding_new_mines(){
@@ -88,12 +93,6 @@ public class GameManager {
     public int getLocation(){
         return  currunt_location_User;
     }
-    public int getRow(){
-        return  ROW;
-    }
-    public int getColumn(){
-        return  COLUMN;
-    }
 
 
 
@@ -101,6 +100,11 @@ public class GameManager {
     public void incrementScore() {
         score += 10;
     }
+
+    public void decreasetScore() {
+        score -= 50;
+    }
+
 
     public void decreaseLive() {
         lives--;

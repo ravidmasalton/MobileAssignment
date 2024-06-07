@@ -1,7 +1,11 @@
 package com.example.mobileassignment;
 
+import android.content.Context;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
@@ -33,7 +37,6 @@ public class MainActivity extends AppCompatActivity {
     private final int DELAY = 1000;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,20 +65,19 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-
-
     private void update_currunt_location_view(int direction) {
         trivia_IMG_player[gameManager.getLocation()].setVisibility(View.INVISIBLE);
         gameManager.setNewLocation(direction);
         trivia_IMG_player[gameManager.getLocation()].setVisibility(View.VISIBLE);
-
-
+        checkCollision();
     }
+
     private void lose() {
         stop();
-        toast("You lose");
         openAdvertisementDialog();
+
     }
+
     private void openAdvertisementDialog() {
         new MaterialAlertDialogBuilder(this)
                 .setTitle("No lives")
@@ -84,12 +86,15 @@ public class MainActivity extends AppCompatActivity {
                 .setNegativeButton("No", (dialog, which) -> noVideoAd())
                 .show();
     }
+
     private void showVideoAd() {
         gameManager.addExtraLive();
         updateLivesUI();
         start();
     }
+
     private void noVideoAd() {
+        toast("You lose");
         gameDone();
     }
 
@@ -99,32 +104,43 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void tick() {
-    gameLoop();
+        gameLoop();
+
 
     }
 
-    private void gameLoop() {
-
-        if(gameManager.checkCollision())
-            toast("Oops");
-        if(gameManager.getLives()==0)
-            lose();
-
-        ArrayList<Integer> location_of_mines = gameManager.Update_mines();
-
-        for (int i=0;i<location_of_mines.size();i++){
-            if(location_of_mines.get(i)==1){
-                trivia_IMG_surface[i].setImageResource(R.drawable.donut);
+    private void checkCollision(){
+        if (gameManager.checkCollision()) {
+            toast("bomm");
+            vibrator();
+            gameManager.actionCollision();
+            updateMines();
+            if (gameManager.getLives() == 0) {
+                lose();
             }
-            else if(location_of_mines.get(i)==0){
+            updateLivesUI();
+        }
+
+    }
+
+
+    private void gameLoop() {
+        updateMines();
+        gameManager.incrementScore();
+        trivia_LBL_score.setText(String.valueOf(gameManager.getScore()));
+        checkCollision();
+    }
+
+    private void updateMines(){
+        ArrayList<Integer> location_of_mines = gameManager.Update_mines();
+        for (int i = 0; i < location_of_mines.size(); i++) {
+            if (location_of_mines.get(i) == 1) {
+                trivia_IMG_surface[i].setImageResource(R.drawable.policeman);
+            } else if (location_of_mines.get(i) == 0) {
                 trivia_IMG_surface[i].setImageResource(0);
             }
         }
-        updateLivesUI();
-        gameManager.incrementScore();
-        trivia_LBL_score.setText(String.valueOf(gameManager.getScore()));
     }
-
 
 
     private void start() {
@@ -191,6 +207,9 @@ public class MainActivity extends AppCompatActivity {
                 findViewById(R.id.main_IMG51),
                 findViewById(R.id.main_IMG52),
 
+                findViewById(R.id.main_IMG60),
+                findViewById(R.id.main_IMG61),
+                findViewById(R.id.main_IMG62),
 
 
         };
@@ -204,14 +223,24 @@ public class MainActivity extends AppCompatActivity {
 
 
         trivia_IMG_player = new AppCompatImageView[]{
-                findViewById(R.id.main_player1),
-                findViewById(R.id.main_player2),
-                findViewById(R.id.main_player3)
+                findViewById(R.id.player1),
+                findViewById(R.id.player2),
+                findViewById(R.id.player3)
         };
     }
 
     private void toast(String text) {
         Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
+    }
+    private void vibrator (){
+        Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+// Vibrate for 500 milliseconds
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            v.vibrate(VibrationEffect.createOneShot(500, VibrationEffect.DEFAULT_AMPLITUDE));
+        } else {
+            //deprecated in API 26
+            v.vibrate(500);
+        }
     }
 }
 

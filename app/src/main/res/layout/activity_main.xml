@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
@@ -20,50 +19,50 @@
         android:id="@+id/trivia_LAY_heartLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
         android:layout_margin="20dp"
-        android:paddingTop="20dp"
-
-        android:orientation="horizontal">
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/trivia_IMG_heart1"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:scaleType="fitCenter"
-            android:src="@drawable/ic_heart"/>
-
-        <View
-            android:layout_width="12dp"
-            android:layout_height="0dp"/>
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/trivia_IMG_heart2"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:scaleType="fitCenter"
-            android:src="@drawable/ic_heart"/>
-
-        <View
-            android:layout_width="12dp"
-            android:layout_height="0dp"/>
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/trivia_IMG_heart3"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:scaleType="fitCenter"
-            android:src="@drawable/ic_heart"/>
-
-        <View
-            android:layout_width="12dp"
-            android:layout_height="0dp"/>
+        android:orientation="horizontal"
+        android:paddingTop="20dp">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/trivia_IMG_heart4"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:scaleType="fitCenter"
-            android:src="@drawable/ic_heart"/>
+            android:src="@drawable/ic_heart" />
+
+        <View
+            android:layout_width="12dp"
+            android:layout_height="0dp" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/trivia_IMG_heart3"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_heart" />
+
+        <View
+            android:layout_width="12dp"
+            android:layout_height="0dp" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/trivia_IMG_heart2"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_heart" />
+
+        <View
+            android:layout_width="12dp"
+            android:layout_height="0dp" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/trivia_IMG_heart1"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_heart" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -72,15 +71,15 @@
         android:id="@+id/trivia_LBL_score"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
         android:layout_alignTop="@id/trivia_LAY_heartLayout"
         android:layout_alignBottom="@id/trivia_LAY_heartLayout"
+        android:layout_alignParentLeft="true"
         android:layout_marginEnd="16dp"
-        android:textSize="32sp"
-        android:textStyle="bold"
         android:gravity="center"
+        android:text="000"
         android:textColor="#ffffff"
-        android:text="000"/>
+        android:textSize="32sp"
+        android:textStyle="bold" />
 
 
     <androidx.appcompat.widget.LinearLayoutCompat
@@ -88,108 +87,117 @@
         android:id="@+id/playing_surface"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_above="@id/keysBTN"
         android:layout_below="@+id/trivia_LAY_heartLayout"
-        android:layout_above="@id/trivia_BTN"
         android:layout_marginTop="15dp"
         android:layout_marginBottom="15dp"
-        android:orientation="horizontal"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        android:orientation="horizontal">
 
         <androidx.appcompat.widget.LinearLayoutCompat
 
             android:id="@+id/main_layout1"
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="match_parent"
+            android:layout_weight="1"
             android:orientation="vertical">
 
             <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/main_IMG00"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"/>
+                android:id="@+id/main_IMG00"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/main_IMG10"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1"/>
+                android:layout_weight="1" />
+
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/main_IMG20"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1"/>
+                android:layout_weight="1" />
 
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/main_IMG30"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1"/>
+                android:layout_weight="1" />
+
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/main_IMG40"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1"/>
+                android:layout_weight="1" />
+
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/main_IMG50"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1"/>
+                android:layout_weight="1" />
 
 
             <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/main_player1"
+                android:id="@+id/main_IMG60"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1"
-                android:src="@drawable/policeman"
-                android:visibility="invisible"/>
+                android:layout_weight="1" />
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 
         <androidx.appcompat.widget.LinearLayoutCompat
-        android:id="@+id/main_layout2"
-        android:layout_width="0dp"
-        android:layout_weight="1"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/main_IMG01"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"/>
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/main_IMG11"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"/>
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/main_IMG21"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"/>
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/main_IMG31"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"/>
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/main_IMG41"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"/>
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/main_IMG51"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"/>
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/main_player2"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:id="@+id/main_layout2"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:src="@drawable/policeman"/>
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_IMG01"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_IMG11"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_IMG21"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_IMG31"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_IMG41"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_IMG51"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_IMG61"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -197,106 +205,109 @@
         <androidx.appcompat.widget.LinearLayoutCompat
             android:id="@+id/main_layout3"
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="match_parent"
+            android:layout_weight="1"
             android:orientation="vertical">
+
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/main_IMG02"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1"/>
+                android:layout_weight="1" />
+
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/main_IMG12"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1"/>
+                android:layout_weight="1" />
+
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/main_IMG22"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1"/>
+                android:layout_weight="1" />
 
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/main_IMG32"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1"/>
+                android:layout_weight="1" />
+
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/main_IMG42"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1"/>
+                android:layout_weight="1" />
+
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/main_IMG52"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1"/>
+                android:layout_weight="1" />
+
             <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/main_player3"
+                android:id="@+id/main_IMG62"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1"
-                android:src="@drawable/policeman"
-                android:visibility="invisible"/>
+                android:layout_weight="1" />
         </androidx.appcompat.widget.LinearLayoutCompat>
 
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 
 
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:id="@+id/main_layout4"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_above="@+id/keysBTN"
+        android:layout_marginBottom="15dp"
         android:orientation="horizontal">
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/main_IMG0888"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"/>
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/main_IMG8114"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"/>
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/main_IMG224"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"/>
 
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/player1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:src="@drawable/thief"
+            android:visibility="invisible" />
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/player2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:src="@drawable/thief" />
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/player3"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:src="@drawable/thief"
+            android:visibility="invisible" />
 
+    </LinearLayout>
 
-    </androidx.appcompat.widget.LinearLayoutCompat>
-    
-    
-    
-    
-    
-    
 
 
     <RelativeLayout
-        android:id="@+id/trivia_BTN"
+        android:id="@+id/keysBTN"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_margin="15dp">
 
-    <com.google.android.material.button.MaterialButton
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/trivia_BTN_Left"
             style="@style/Widget.Material3.Button.Icon"
             android:layout_width="85dp"
             android:layout_height="85dp"
+            android:layout_alignParentLeft="true"
+            android:backgroundTint="#4CAF50"
             android:insetTop="0dp"
             android:insetBottom="0dp"
-            android:backgroundTint="#4CAF50"
             app:icon="@drawable/left"
             app:iconGravity="textEnd"
-            app:iconSize="52dp"
-            android:layout_alignParentStart="true"
-            />
+            app:iconSize="52dp" />
 
 
         <com.google.android.material.button.MaterialButton
@@ -304,14 +315,13 @@
             style="@style/Widget.Material3.Button.Icon"
             android:layout_width="85dp"
             android:layout_height="85dp"
+            android:layout_alignParentRight="true"
+            android:backgroundTint="#4CAF50"
             android:insetTop="0dp"
             android:insetBottom="0dp"
-            android:backgroundTint="#4CAF50"
             app:icon="@drawable/right"
             app:iconGravity="textEnd"
-            app:iconSize="52dp"
-            android:layout_alignParentEnd="true"
-            />
+            app:iconSize="52dp" />
     </RelativeLayout>
 
 
