@@ -77,7 +77,9 @@
         android:layout_marginEnd="16dp"
         android:gravity="center"
         android:text="000"
-        android:textColor="#ffffff"
+        android:textColor="#212121"
+        android:padding="10dp"
+        android:layout_marginTop="10dp"
         android:textSize="32sp"
         android:textStyle="bold" />
 
@@ -304,9 +306,7 @@
             android:layout_alignParentLeft="true"
             android:backgroundTint="#4CAF50"
             android:insetTop="0dp"
-            android:insetBottom="0dp"
             app:icon="@drawable/left"
-            app:iconGravity="textEnd"
             app:iconSize="52dp" />
 
 
@@ -318,9 +318,7 @@
             android:layout_alignParentRight="true"
             android:backgroundTint="#4CAF50"
             android:insetTop="0dp"
-            android:insetBottom="0dp"
             app:icon="@drawable/right"
-            app:iconGravity="textEnd"
             app:iconSize="52dp" />
     </RelativeLayout>
 

@@ -13,9 +13,6 @@ import android.widget.Toast;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatImageView;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
@@ -26,12 +23,12 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
 
-    private AppCompatImageView[] trivia_IMG_hearts;
-    private AppCompatImageView[] trivia_IMG_surface;
-    private AppCompatImageView[] trivia_IMG_player;
-    private MaterialTextView trivia_LBL_score;
-    private MaterialButton trivia_BTN_left;
-    private MaterialButton trivia_BTN_right;
+    private AppCompatImageView[] game_IMG_hearts;
+    private AppCompatImageView[] game_IMG_surface;
+    private AppCompatImageView[] game_IMG_player;
+    private MaterialTextView game_LBL_score;
+    private MaterialButton game_BTN_left;
+    private MaterialButton game_BTN_right;
     private GameManager gameManager;
     private Handler handler = new Handler();
     private final int DELAY = 1000;
@@ -43,12 +40,12 @@ public class MainActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
         findViews();
-        gameManager = new GameManager(3, trivia_IMG_surface.length);
+        gameManager = new GameManager(3);
         updateLivesUI();
 
 
-        trivia_BTN_left.setOnClickListener(v -> update_currunt_location_view(0));
-        trivia_BTN_right.setOnClickListener(v -> update_currunt_location_view(1));
+        game_BTN_left.setOnClickListener(v -> update_currunt_location_view(0));
+        game_BTN_right.setOnClickListener(v -> update_currunt_location_view(1));
     }
 
     protected void onResume() {
@@ -65,12 +62,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void update_currunt_location_view(int direction) {
-        trivia_IMG_player[gameManager.getLocation()].setVisibility(View.INVISIBLE);
-        gameManager.setNewLocation(direction);
-        trivia_IMG_player[gameManager.getLocation()].setVisibility(View.VISIBLE);
-        checkCollision();
-    }
 
     private void lose() {
         stop();
@@ -78,43 +69,19 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void openAdvertisementDialog() {
-        new MaterialAlertDialogBuilder(this)
-                .setTitle("No lives")
-                .setMessage("watch ad for extra live")
-                .setPositiveButton("Yes", (dialog, which) -> showVideoAd())
-                .setNegativeButton("No", (dialog, which) -> noVideoAd())
-                .show();
-    }
-
-    private void showVideoAd() {
-        gameManager.addExtraLive();
-        updateLivesUI();
-        start();
-    }
-
-    private void noVideoAd() {
-        toast("You lose");
-        gameDone();
-    }
-
     private void gameDone() {
         Log.d("pttt", "Game Done");
         finish();
     }
 
-    private void tick() {
-        gameLoop();
 
-
-    }
-
-    private void checkCollision(){
+    private void checkCollision() {
         if (gameManager.checkCollision()) {
             toast("bomm");
             vibrator();
-            gameManager.actionCollision();
-            updateMines();
+
+            int index_location=(gameManager.getROW()-1)*gameManager.getCOLUMN()+gameManager.getLocation();
+            game_IMG_surface[index_location].setImageResource(0);
             if (gameManager.getLives() == 0) {
                 lose();
             }
@@ -127,19 +94,40 @@ public class MainActivity extends AppCompatActivity {
     private void gameLoop() {
         updateMines();
         gameManager.incrementScore();
-        trivia_LBL_score.setText(String.valueOf(gameManager.getScore()));
+        game_LBL_score.setText(String.valueOf(gameManager.getScore()));
         checkCollision();
     }
 
-    private void updateMines(){
+    private void updateMines() {
         ArrayList<Integer> location_of_mines = gameManager.Update_mines();
         for (int i = 0; i < location_of_mines.size(); i++) {
             if (location_of_mines.get(i) == 1) {
-                trivia_IMG_surface[i].setImageResource(R.drawable.policeman);
+                game_IMG_surface[i].setImageResource(R.drawable.policeman);
             } else if (location_of_mines.get(i) == 0) {
-                trivia_IMG_surface[i].setImageResource(0);
+                game_IMG_surface[i].setImageResource(0);
             }
         }
+    }
+
+    private void updateLivesUI() {
+        int SZ = game_IMG_hearts.length;
+
+        for (int i = 0; i < SZ; i++) {
+            game_IMG_hearts[i].setVisibility(View.VISIBLE);
+        }
+
+        for (int i = 0; i < SZ - gameManager.getLives(); i++) {
+            game_IMG_hearts[SZ - i - 1].setVisibility(View.INVISIBLE);
+        }
+
+
+    }
+
+    private void update_currunt_location_view(int direction) {
+        game_IMG_player[gameManager.getLocation()].setVisibility(View.INVISIBLE);
+        gameManager.setNewLocation(direction);
+        game_IMG_player[gameManager.getLocation()].setVisibility(View.VISIBLE);
+        checkCollision();
     }
 
 
@@ -161,25 +149,18 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void updateLivesUI() {
-        int SZ = trivia_IMG_hearts.length;
-
-        for (int i = 0; i < SZ; i++) {
-            trivia_IMG_hearts[i].setVisibility(View.VISIBLE);
-        }
-
-        for (int i = 0; i < SZ - gameManager.getLives(); i++) {
-            trivia_IMG_hearts[SZ - i - 1].setVisibility(View.INVISIBLE);
-        }
+    private void tick() {
+        gameLoop();
 
 
     }
 
+
     private void findViews() {
-        trivia_LBL_score = findViewById(R.id.trivia_LBL_score);
-        trivia_BTN_left = findViewById(R.id.trivia_BTN_Left);
-        trivia_BTN_right = findViewById(R.id.trivia_BTN_Right);
-        trivia_IMG_surface = new AppCompatImageView[]{
+        game_LBL_score = findViewById(R.id.trivia_LBL_score);
+        game_BTN_left = findViewById(R.id.trivia_BTN_Left);
+        game_BTN_right = findViewById(R.id.trivia_BTN_Right);
+        game_IMG_surface = new AppCompatImageView[]{
 
                 findViewById(R.id.main_IMG00),
                 findViewById(R.id.main_IMG01),
@@ -214,7 +195,7 @@ public class MainActivity extends AppCompatActivity {
 
         };
 
-        trivia_IMG_hearts = new AppCompatImageView[]{
+        game_IMG_hearts = new AppCompatImageView[]{
                 findViewById(R.id.trivia_IMG_heart1),
                 findViewById(R.id.trivia_IMG_heart2),
                 findViewById(R.id.trivia_IMG_heart3),
@@ -222,7 +203,7 @@ public class MainActivity extends AppCompatActivity {
         };
 
 
-        trivia_IMG_player = new AppCompatImageView[]{
+        game_IMG_player = new AppCompatImageView[]{
                 findViewById(R.id.player1),
                 findViewById(R.id.player2),
                 findViewById(R.id.player3)
@@ -232,7 +213,8 @@ public class MainActivity extends AppCompatActivity {
     private void toast(String text) {
         Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
     }
-    private void vibrator (){
+
+    private void vibrator() {
         Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
 // Vibrate for 500 milliseconds
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -242,7 +224,31 @@ public class MainActivity extends AppCompatActivity {
             v.vibrate(500);
         }
     }
+
+    private void noVideoAd() {
+        toast("You lose");
+        gameDone();
+    }
+
+    private void openAdvertisementDialog() {
+        new MaterialAlertDialogBuilder(this)
+                .setTitle("No lives")
+                .setMessage("watch ad for extra live")
+                .setPositiveButton("Yes", (dialog, which) -> showVideoAd())
+                .setNegativeButton("No", (dialog, which) -> noVideoAd())
+                .show();
+    }
+
+    private void showVideoAd() {
+        gameManager.addExtraLive();
+        updateLivesUI();
+        start();
+    }
+
+
+
 }
+
 
 
 
