@@ -1,6 +1,10 @@
 package com.example.mobileassignment;
 
 import android.content.Context;
+import android.media.MediaPlayer;
+import android.media.Ringtone;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -24,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     private AppCompatImageView[] game_IMG_hearts;
-    private AppCompatImageView[] game_IMG_surface;
+    private AppCompatImageView[][] game_IMG_surface;
     private AppCompatImageView[] game_IMG_player;
     private MaterialTextView game_LBL_score;
     private MaterialButton game_BTN_left;
@@ -40,17 +44,17 @@ public class MainActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
         findViews();
-        gameManager = new GameManager(3);
-        updateLivesUI();
-
 
         game_BTN_left.setOnClickListener(v -> update_currunt_location_view(0));
         game_BTN_right.setOnClickListener(v -> update_currunt_location_view(1));
+
+        gameManager = new GameManager(3);
+        updateLivesUI();
+
     }
 
     protected void onResume() {
         super.onResume();
-
         start();
 
     }
@@ -63,25 +67,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private void lose() {
-        stop();
-        openAdvertisementDialog();
-
-    }
-
-    private void gameDone() {
-        Log.d("pttt", "Game Done");
-        finish();
-    }
-
-
     private void checkCollision() {
         if (gameManager.checkCollision()) {
-            toast("bomm");
+            toast("boom");
             vibrator();
+            playSound();
+            int row=gameManager.getROW()-1;
+            int col=gameManager.getLocation();
 
-            int index_location=(gameManager.getROW()-1)*gameManager.getCOLUMN()+gameManager.getLocation();
-            game_IMG_surface[index_location].setImageResource(0);
+            game_IMG_surface[row][col].setImageResource(0);
             if (gameManager.getLives() == 0) {
                 lose();
             }
@@ -91,7 +85,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+
     private void gameLoop() {
+
         updateMines();
         gameManager.incrementScore();
         game_LBL_score.setText(String.valueOf(gameManager.getScore()));
@@ -99,12 +95,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void updateMines() {
-        ArrayList<Integer> location_of_mines = gameManager.Update_mines();
-        for (int i = 0; i < location_of_mines.size(); i++) {
-            if (location_of_mines.get(i) == 1) {
-                game_IMG_surface[i].setImageResource(R.drawable.policeman);
-            } else if (location_of_mines.get(i) == 0) {
-                game_IMG_surface[i].setImageResource(0);
+        int[][] location_of_mines = gameManager.Update_mines();
+        for (int i = 0; i < location_of_mines.length; i++) {
+            for (int j = 0; j < location_of_mines[i].length; j++)
+                if (location_of_mines[i][j] == 1) {
+                    game_IMG_surface[i][j].setImageResource(R.drawable.police_car);
+                } else if (location_of_mines[i][j] == 0) {
+                    game_IMG_surface[i][j].setImageResource(0);
             }
         }
     }
@@ -132,7 +129,6 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void start() {
-
         handler.postDelayed(runnable, DELAY);
     }
 
@@ -152,54 +148,52 @@ public class MainActivity extends AppCompatActivity {
     private void tick() {
         gameLoop();
 
-
     }
 
 
     private void findViews() {
-        game_LBL_score = findViewById(R.id.trivia_LBL_score);
-        game_BTN_left = findViewById(R.id.trivia_BTN_Left);
-        game_BTN_right = findViewById(R.id.trivia_BTN_Right);
-        game_IMG_surface = new AppCompatImageView[]{
+        game_LBL_score = findViewById(R.id.game_LBL_score);
+        game_BTN_left = findViewById(R.id.game_BTN_Left);
+        game_BTN_right = findViewById(R.id.game_BTN_Right);
+        game_IMG_surface = new AppCompatImageView[][]{
 
-                findViewById(R.id.main_IMG00),
+                {findViewById(R.id.main_IMG00),
                 findViewById(R.id.main_IMG01),
-                findViewById(R.id.main_IMG02),
+                findViewById(R.id.main_IMG02)},
 
 
-                findViewById(R.id.main_IMG10),
+                {findViewById(R.id.main_IMG10),
                 findViewById(R.id.main_IMG11),
-                findViewById(R.id.main_IMG12),
+                findViewById(R.id.main_IMG12)},
 
 
-                findViewById(R.id.main_IMG20),
+                {findViewById(R.id.main_IMG20),
                 findViewById(R.id.main_IMG21),
-                findViewById(R.id.main_IMG22),
+                findViewById(R.id.main_IMG22)},
 
-                findViewById(R.id.main_IMG30),
+                {findViewById(R.id.main_IMG30),
                 findViewById(R.id.main_IMG31),
-                findViewById(R.id.main_IMG32),
+                findViewById(R.id.main_IMG32)},
 
-                findViewById(R.id.main_IMG40),
+                {findViewById(R.id.main_IMG40),
                 findViewById(R.id.main_IMG41),
-                findViewById(R.id.main_IMG42),
+                findViewById(R.id.main_IMG42)},
 
-                findViewById(R.id.main_IMG50),
+                {findViewById(R.id.main_IMG50),
                 findViewById(R.id.main_IMG51),
-                findViewById(R.id.main_IMG52),
+                findViewById(R.id.main_IMG52)},
 
-                findViewById(R.id.main_IMG60),
+                {findViewById(R.id.main_IMG60),
                 findViewById(R.id.main_IMG61),
-                findViewById(R.id.main_IMG62),
-
+                findViewById(R.id.main_IMG62)},
 
         };
 
         game_IMG_hearts = new AppCompatImageView[]{
-                findViewById(R.id.trivia_IMG_heart1),
-                findViewById(R.id.trivia_IMG_heart2),
-                findViewById(R.id.trivia_IMG_heart3),
-                findViewById(R.id.trivia_IMG_heart4),
+                findViewById(R.id.game_IMG_heart1),
+                findViewById(R.id.game_IMG_heart2),
+                findViewById(R.id.game_IMG_heart3),
+                findViewById(R.id.game_IMG_heart4),
         };
 
 
@@ -216,7 +210,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void vibrator() {
         Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-// Vibrate for 500 milliseconds
+        // Vibrate for 500 milliseconds
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             v.vibrate(VibrationEffect.createOneShot(500, VibrationEffect.DEFAULT_AMPLITUDE));
         } else {
@@ -224,26 +218,22 @@ public class MainActivity extends AppCompatActivity {
             v.vibrate(500);
         }
     }
+    private void playSound() {
+        MediaPlayer mp = MediaPlayer.create(getApplicationContext(), R.raw.police_siren2);
+        mp.start();
 
-    private void noVideoAd() {
+    }
+    private void lose() {
+        stop();
         toast("You lose");
-        gameDone();
-    }
-
-    private void openAdvertisementDialog() {
-        new MaterialAlertDialogBuilder(this)
-                .setTitle("No lives")
-                .setMessage("watch ad for extra live")
-                .setPositiveButton("Yes", (dialog, which) -> showVideoAd())
-                .setNegativeButton("No", (dialog, which) -> noVideoAd())
-                .show();
-    }
-
-    private void showVideoAd() {
-        gameManager.addExtraLive();
+        game_IMG_player[gameManager.getLocation()].setVisibility(View.INVISIBLE);
+        gameManager = new GameManager(3);
+        game_IMG_player[gameManager.getLocation()].setVisibility(View.VISIBLE);
         updateLivesUI();
         start();
     }
+
+
 
 
 
