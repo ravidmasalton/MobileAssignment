@@ -2,27 +2,21 @@ package com.example.mobileassignment;
 
 import android.content.Context;
 import android.media.MediaPlayer;
-import android.media.Ringtone;
-import android.media.RingtoneManager;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.AppCompatImageView;
 
 import com.google.android.material.button.MaterialButton;
-import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textview.MaterialTextView;
-
-import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -42,14 +36,16 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+
         setContentView(R.layout.activity_main);
+
         findViews();
-
-        game_BTN_left.setOnClickListener(v -> update_currunt_location_view(0));
-        game_BTN_right.setOnClickListener(v -> update_currunt_location_view(1));
-
+        game_BTN_left.setOnClickListener(v -> updateCurrentLocationUIOfPlayer(0));
+        game_BTN_right.setOnClickListener(v -> updateCurrentLocationUIOfPlayer(1));
         gameManager = new GameManager(3);
         updateLivesUI();
+
 
     }
 
@@ -67,7 +63,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private void checkCollision() {
+
+    private void checkCollision() { //check if player hit a mine
         if (gameManager.checkCollision()) {
             toast("boom");
             vibrator();
@@ -81,20 +78,22 @@ public class MainActivity extends AppCompatActivity {
             }
             updateLivesUI();
         }
+        else
+            gameManager.incrementScore();
+
+        game_LBL_score.setText(String.valueOf(gameManager.getScore()));
+
 
     }
 
 
 
     private void gameLoop() {
-
         updateMines();
-        gameManager.incrementScore();
-        game_LBL_score.setText(String.valueOf(gameManager.getScore()));
         checkCollision();
     }
 
-    private void updateMines() {
+    private void updateMines() { //Update mines on the matrix
         int[][] location_of_mines = gameManager.Update_mines();
         for (int i = 0; i < location_of_mines.length; i++) {
             for (int j = 0; j < location_of_mines[i].length; j++)
@@ -106,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void updateLivesUI() {
+    private void updateLivesUI() { //update lives
         int SZ = game_IMG_hearts.length;
 
         for (int i = 0; i < SZ; i++) {
@@ -120,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void update_currunt_location_view(int direction) {
+    private void updateCurrentLocationUIOfPlayer(int direction) {  //update player location
         game_IMG_player[gameManager.getLocation()].setVisibility(View.INVISIBLE);
         gameManager.setNewLocation(direction);
         game_IMG_player[gameManager.getLocation()].setVisibility(View.VISIBLE);
@@ -223,14 +222,19 @@ public class MainActivity extends AppCompatActivity {
         mp.start();
 
     }
-    private void lose() {
+    private void lose() { //lose game
         stop();
         toast("You lose");
+        gameStartup();;
+        start();
+    }
+
+    public void gameStartup(){ //restart game
         game_IMG_player[gameManager.getLocation()].setVisibility(View.INVISIBLE);
         gameManager = new GameManager(3);
-        game_IMG_player[gameManager.getLocation()].setVisibility(View.VISIBLE);
         updateLivesUI();
-        start();
+        updateMines();
+        game_IMG_player[gameManager.getLocation()].setVisibility(View.VISIBLE);
     }
 
 
