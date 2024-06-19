@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
     private MaterialButton game_BTN_right;
     private GameManager gameManager;
     private Handler handler = new Handler();
-    private final int DELAY = 1000;
+    private  int delay = 1000;
 
 
     @Override
@@ -41,8 +41,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         findViews();
-        game_BTN_left.setOnClickListener(v -> updateCurrentLocationUIOfPlayer(0));
-        game_BTN_right.setOnClickListener(v -> updateCurrentLocationUIOfPlayer(1));
+        game_BTN_left.setOnClickListener(v -> updateCurrentLocationUIOfPlayer(0)); //left button
+        game_BTN_right.setOnClickListener(v -> updateCurrentLocationUIOfPlayer(1));//right button
         gameManager = new GameManager(3);
         updateLivesUI();
 
@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
             int row=gameManager.getROW()-1;
             int col=gameManager.getLocation();
 
-            game_IMG_surface[row][col].setImageResource(0);
+            game_IMG_surface[row][col].setImageResource(0);//hide mine image from screen when player hit it
             if (gameManager.getLives() == 0) {
                 lose();
             }
@@ -128,12 +128,12 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void start() {
-        handler.postDelayed(runnable, DELAY);
+        handler.postDelayed(runnable, delay);
     }
 
     private Runnable runnable = new Runnable() {
         public void run() {
-            handler.postDelayed(this, DELAY);
+            handler.postDelayed(this, delay);
             tick();
 
         }
@@ -224,7 +224,7 @@ public class MainActivity extends AppCompatActivity {
     }
     private void lose() { //lose game
         stop();
-        toast("You lose");
+        toast("You lose!!");
         gameStartup();;
         start();
     }

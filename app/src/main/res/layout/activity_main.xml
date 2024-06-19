@@ -90,7 +90,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:layout_above="@id/keysBTN"
+        android:layout_above="@id/keysBTN_Left_Right"
         android:layout_below="@+id/main_LAY_heartLayout"
         android:layout_marginTop="15dp"
         android:layout_marginBottom="15dp"
@@ -301,7 +301,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:layout_above="@+id/keysBTN"
+        android:layout_above="@+id/keysBTN_Left_Right"
         android:layout_marginBottom="15dp"
         android:orientation="horizontal">
 
@@ -331,7 +331,7 @@
 
 
     <RelativeLayout
-        android:id="@+id/keysBTN"
+        android:id="@+id/keysBTN_Left_Right"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
