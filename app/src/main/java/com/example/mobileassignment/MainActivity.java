@@ -78,10 +78,7 @@ public class MainActivity extends AppCompatActivity {
             }
             updateLivesUI();
         }
-        else
-            gameManager.incrementScore();
 
-        game_LBL_score.setText(String.valueOf(gameManager.getScore()));
 
 
     }
@@ -90,7 +87,10 @@ public class MainActivity extends AppCompatActivity {
 
     private void gameLoop() {
         updateMines();
+        gameManager.incrementScore();
+        game_LBL_score.setText(String.valueOf(gameManager.getScore()));
         checkCollision();
+
     }
 
     private void updateMines() { //Update mines on the matrix
