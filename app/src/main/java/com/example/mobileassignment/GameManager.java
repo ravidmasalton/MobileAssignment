@@ -8,7 +8,7 @@ public class GameManager {
     private int score = 0;
     private int currunt_location_User;
     private final int ROW=7; //row-1 because the line of the player
-    private final int COLUMN=3;
+    private final int COLUMN=5;
     private Random random = new Random();
     private int [][]all_mine;
     private boolean isNewLIne=true;
@@ -61,10 +61,11 @@ public class GameManager {
                 for (int i = ROW-2; i >= 0; i--) {
                     for (int j = 0; j < COLUMN; j++) {
                         // If the current cell has a 1 and the cell below is 0
-                        if (all_mine[i][j] == 1 ) {
+                        if (all_mine[i][j] != 0 ) {
                             // Move the 1 down
+                            int val=all_mine[i][j];
                             all_mine[i][j] = 0;
-                            all_mine[i+1][j] = 1;
+                            all_mine[i+1][j] = val;
                         }
                     }
                 }
@@ -80,24 +81,37 @@ public class GameManager {
 
         public void Adding_new_mines(){
             int index=random.nextInt(COLUMN);
-            all_mine[0][index]=1;
+            int val=random.nextInt(2-0)+1;;
+
+            all_mine[0][index]=val;
         }
 
-        public boolean checkCollision(){
+        public boolean checkCollisionWithMines(){
             if(all_mine[ROW-1][this.currunt_location_User]==1) {
-                actionCollision();
+                actionCollision(1);
                 return true;
-
             }
             return  false;
 
         }
+        public boolean checkCollisionWithCoins() {
+            if(all_mine[ROW-1][this.currunt_location_User]==2) {
+                actionCollision(2);
+                return true;
+            }
+            return  false;
+        }
 
-        public void actionCollision(){
+
+        public void actionCollision(int isMines){
             all_mine[ROW-1][this.currunt_location_User]=0;
-            decreaseLive();
-            decreasetScore();
-
+            if(isMines==1){
+                decreaseLive();
+                decreasetScore();
+            }
+            else {
+                incrementScore();
+            }
 
         }
 
@@ -115,11 +129,17 @@ public class GameManager {
 
 
     public void incrementScore() {
-        score += 10;
+        score += 5;
+    }
+
+    public void incrementScoreWithBag() {
+        score += 50;
     }
 
     public void decreasetScore() {
         score -= 50;
+        if(score<0)
+            score=0;
     }
 
 

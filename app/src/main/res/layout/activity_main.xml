@@ -13,7 +13,7 @@
         android:layout_height="match_parent"
         android:alpha="0.2"
         android:scaleType="centerCrop"
-        android:src="@drawable/road" />
+        android:src="@drawable/road_with_5_line" />
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:id="@+id/main_LAY_heartLayout"
@@ -123,6 +123,17 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1" />
 
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_IMG03"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_IMG04"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -148,6 +159,19 @@
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/main_IMG12"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_IMG13"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_IMG14"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1" />
@@ -182,7 +206,17 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1" />
 
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_IMG23"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
 
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_IMG24"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -211,6 +245,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1" />
+
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_IMG33"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_IMG34"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+
         </androidx.appcompat.widget.LinearLayoutCompat>
 
 
@@ -238,6 +286,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1" />
+
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_IMG43"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_IMG44"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+
         </androidx.appcompat.widget.LinearLayoutCompat>
 
         <androidx.appcompat.widget.LinearLayoutCompat
@@ -264,6 +326,19 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1" />
+
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_IMG53"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_IMG54"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
         </androidx.appcompat.widget.LinearLayoutCompat>
 
 
@@ -287,6 +362,18 @@
                 android:layout_weight="1" />
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/main_IMG62"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_IMG63"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_IMG64"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1" />
@@ -317,9 +404,23 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:src="@drawable/thief" />
+            android:src="@drawable/thief"
+            android:visibility="invisible"/>
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/player3"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:src="@drawable/thief" />
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/player4"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:src="@drawable/thief"
+            android:visibility="invisible" />
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/player5"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"

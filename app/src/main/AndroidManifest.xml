@@ -11,20 +11,30 @@
         android:icon="@drawable/thief_application_"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
+        android:screenOrientation="portrait"
         android:supportsRtl="false"
         android:theme="@style/Theme.MobileAssignment"
-        android:screenOrientation="portrait"
         tools:targetApi="31">
-
-
         <activity
-            android:name=".MainActivity"
+            android:name=".recordAndMap_Activity"
+            android:exported="false" />
+        <activity
+            android:name=".LoseGameActivity"
+            android:exported="false" />
+        <activity
+            android:name=".OpenActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
+
+            <!-- No intent-filter here -->
         </activity>
     </application>
 

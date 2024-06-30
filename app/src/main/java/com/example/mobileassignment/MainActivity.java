@@ -1,13 +1,19 @@
 package com.example.mobileassignment;
 
+import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -29,6 +35,9 @@ public class MainActivity extends AppCompatActivity {
     private MaterialButton game_BTN_right;
     private GameManager gameManager;
     private Handler handler = new Handler();
+    private DetectorWithSensor moveDetector;
+    private int fast_mode=0;
+    private boolean timerOn=false;
     private  int delay = 1000;
 
 
@@ -37,17 +46,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-
         setContentView(R.layout.activity_main);
-
         findViews();
-        game_BTN_left.setOnClickListener(v -> updateCurrentLocationUIOfPlayer(0)); //left button
-        game_BTN_right.setOnClickListener(v -> updateCurrentLocationUIOfPlayer(1));//right button
         gameManager = new GameManager(3);
+        initViews();
         updateLivesUI();
-
-
     }
+
 
     protected void onResume() {
         super.onResume();
@@ -61,23 +66,94 @@ public class MainActivity extends AppCompatActivity {
         stop();
 
     }
+    private void initViews() {
+        Intent intent = getIntent();
+        Bundle extras = intent.getExtras();
+        if (extras != null) {
+            int sensor = extras.getInt("SENSOR", 0);
+            fast_mode = extras.getInt("FAST_MODE", 0);
+            if (fast_mode == 1) {
+                delay = 500;
+            }
+            if (sensor == 1) {
+                game_BTN_left.setVisibility(View.INVISIBLE);
+                game_BTN_right.setVisibility(View.INVISIBLE);
+                initMoveDetector();
+                moveDetector.start();
+            } else {
+                game_BTN_left.setOnClickListener(v -> updateCurrentLocationUIOfPlayer(0)); // left button
+                game_BTN_right.setOnClickListener(v -> updateCurrentLocationUIOfPlayer(1)); // right button
+            }
+        }
+    }
+
+
+    private void initMoveDetector() {
+        moveDetector = new DetectorWithSensor(this,
+                new MoveCallbackWithSensor() {
+                    @Override
+                    public void updateCurrentLocationUIOfPlayerSensor(int direction) {
+                        updateCurrentLocationUIOfPlayer(direction);
+
+                    }
+                }, new SpeedCallbackWithSensor() {
+            @Override
+            public void speedGameRegularSlow() {
+                if (fast_mode==1){
+                    stop();
+                    delay=700;
+                    start();
+                }
+                else{
+                    stop();
+                    delay=1200;
+                    start();
+                }
+
+
+            }
+
+            @Override
+            public void speedGameFaster() {
+                if (fast_mode==1){
+                    stop();
+                    delay=300;
+                    start();
+                }
+                else{
+                    stop();
+                    delay=500;
+                    start();
+                }
+
+            }
+        });
+    }
 
 
 
     private void checkCollision() { //check if player hit a mine
-        if (gameManager.checkCollision()) {
+        if (gameManager.checkCollisionWithMines()) {
             toast("boom");
             vibrator();
-            playSound();
-            int row=gameManager.getROW()-1;
-            int col=gameManager.getLocation();
-
-            game_IMG_surface[row][col].setImageResource(0);//hide mine image from screen when player hit it
+            playSound(R.raw.police_siren3);
+            //hide mine image from screen when player hit it
             if (gameManager.getLives() == 0) {
                 lose();
             }
             updateLivesUI();
         }
+        else if(gameManager.checkCollisionWithCoins()){
+            gameManager.incrementScoreWithBag();
+            playSound(R.raw.coin_and_money_bag);
+        }
+        int row=gameManager.getROW()-1;
+        int col=gameManager.getLocation();
+        game_IMG_surface[row][col].setImageResource(0);
+        game_LBL_score.setText(String.valueOf(gameManager.getScore()));
+
+
+
 
 
 
@@ -88,7 +164,6 @@ public class MainActivity extends AppCompatActivity {
     private void gameLoop() {
         updateMines();
         gameManager.incrementScore();
-        game_LBL_score.setText(String.valueOf(gameManager.getScore()));
         checkCollision();
 
     }
@@ -99,7 +174,11 @@ public class MainActivity extends AppCompatActivity {
             for (int j = 0; j < location_of_mines[i].length; j++)
                 if (location_of_mines[i][j] == 1) {
                     game_IMG_surface[i][j].setImageResource(R.drawable.police_car);
-                } else if (location_of_mines[i][j] == 0) {
+                }
+            else if(location_of_mines[i][j] == 2){
+                game_IMG_surface[i][j].setImageResource(R.drawable.bag_of_money);
+                }
+                else if (location_of_mines[i][j] == 0) {
                     game_IMG_surface[i][j].setImageResource(0);
             }
         }
@@ -128,7 +207,10 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void start() {
-        handler.postDelayed(runnable, delay);
+        if(!timerOn) {
+            timerOn=true;
+            handler.postDelayed(runnable, delay);
+        }
     }
 
     private Runnable runnable = new Runnable() {
@@ -140,6 +222,7 @@ public class MainActivity extends AppCompatActivity {
     };
 
     private void stop() {
+        timerOn=false;
         handler.removeCallbacks(runnable);
 
     }
@@ -157,34 +240,48 @@ public class MainActivity extends AppCompatActivity {
         game_IMG_surface = new AppCompatImageView[][]{
 
                 {findViewById(R.id.main_IMG00),
-                findViewById(R.id.main_IMG01),
-                findViewById(R.id.main_IMG02)},
+                 findViewById(R.id.main_IMG01),
+                 findViewById(R.id.main_IMG02),
+                 findViewById(R.id.main_IMG03),
+                 findViewById(R.id.main_IMG04)},
 
 
                 {findViewById(R.id.main_IMG10),
-                findViewById(R.id.main_IMG11),
-                findViewById(R.id.main_IMG12)},
+                 findViewById(R.id.main_IMG11),
+                 findViewById(R.id.main_IMG12),
+                 findViewById(R.id.main_IMG13),
+                 findViewById(R.id.main_IMG14)},
 
 
                 {findViewById(R.id.main_IMG20),
-                findViewById(R.id.main_IMG21),
-                findViewById(R.id.main_IMG22)},
+                 findViewById(R.id.main_IMG21),
+                 findViewById(R.id.main_IMG22),
+                 findViewById(R.id.main_IMG23),
+                 findViewById(R.id.main_IMG24)},
 
                 {findViewById(R.id.main_IMG30),
-                findViewById(R.id.main_IMG31),
-                findViewById(R.id.main_IMG32)},
+                 findViewById(R.id.main_IMG31),
+                 findViewById(R.id.main_IMG32),
+                 findViewById(R.id.main_IMG33),
+                 findViewById(R.id.main_IMG34)},
 
                 {findViewById(R.id.main_IMG40),
-                findViewById(R.id.main_IMG41),
-                findViewById(R.id.main_IMG42)},
+                 findViewById(R.id.main_IMG41),
+                 findViewById(R.id.main_IMG42),
+                 findViewById(R.id.main_IMG43),
+                 findViewById(R.id.main_IMG44)},
 
                 {findViewById(R.id.main_IMG50),
-                findViewById(R.id.main_IMG51),
-                findViewById(R.id.main_IMG52)},
+                 findViewById(R.id.main_IMG51),
+                 findViewById(R.id.main_IMG52),
+                 findViewById(R.id.main_IMG53),
+                 findViewById(R.id.main_IMG54)},
 
                 {findViewById(R.id.main_IMG60),
-                findViewById(R.id.main_IMG61),
-                findViewById(R.id.main_IMG62)},
+                 findViewById(R.id.main_IMG61),
+                 findViewById(R.id.main_IMG62),
+                 findViewById(R.id.main_IMG63),
+                 findViewById(R.id.main_IMG64)},
 
         };
 
@@ -199,7 +296,9 @@ public class MainActivity extends AppCompatActivity {
         game_IMG_player = new AppCompatImageView[]{
                 findViewById(R.id.player1),
                 findViewById(R.id.player2),
-                findViewById(R.id.player3)
+                findViewById(R.id.player3),
+                findViewById(R.id.player4),
+                findViewById(R.id.player5)
         };
     }
 
@@ -217,25 +316,33 @@ public class MainActivity extends AppCompatActivity {
             v.vibrate(500);
         }
     }
-    private void playSound() {
-        MediaPlayer mp = MediaPlayer.create(getApplicationContext(), R.raw.police_siren2);
+    private void playSound(int idSound) {
+        MediaPlayer mp = MediaPlayer.create(getApplicationContext(), idSound);
         mp.start();
 
     }
     private void lose() { //lose game
         stop();
         toast("You lose!!");
-        gameStartup();;
-        start();
+        nextViews();
+
+
     }
 
-    public void gameStartup(){ //restart game
-        game_IMG_player[gameManager.getLocation()].setVisibility(View.INVISIBLE);
-        gameManager = new GameManager(3);
-        updateLivesUI();
-        updateMines();
-        game_IMG_player[gameManager.getLocation()].setVisibility(View.VISIBLE);
+    private void nextViews() {
+        Intent mainActivityIntent = new Intent(getApplicationContext(), LoseGameActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putInt("score",gameManager.getScore());
+        mainActivityIntent.putExtras(bundle);
+        startActivity(mainActivityIntent);
+        finish();
     }
+
+
+
+
+
+
 
 
 

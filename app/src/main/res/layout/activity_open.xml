@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".OpenActivity"
+    android:background="@drawable/cops_and_thieves2">
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/main_LBL_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cops and thieves"
+        android:textColor="#212121"
+        android:textSize="50sp"
+        android:textStyle="bold"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:layout_marginTop="100dp"
+        />
+
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/switch_sensors_speedGame"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerInParent="true"
+        android:layout_below="@+id/main_LBL_title"
+        android:padding="30dp"
+        android:paddingLeft="20dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/switch_sensors"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="50dp"
+            android:layout_centerHorizontal="true"
+            android:text="Sensors            "
+            android:textSize="30sp" />
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/switch_fast_mode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="50dp"
+            android:layout_centerHorizontal="true"
+            android:text="Fast mode        "
+            android:textSize="30sp" />
+
+        <View
+            android:layout_width="12dp"
+            android:layout_height="30dp" />
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/game_BTN_Start_Game"
+            style="@style/Widget.Material3.Button.Icon"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="30dp"
+            android:textStyle="bold"
+            android:backgroundTint="#1565C0"
+            android:layout_below="@+id/switch_sensors_speedGame"
+            android:layout_centerInParent="true"
+            android:layout_marginBottom="10dp"
+            android:text="start game"
+             />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/game_BTN_Record"
+            style="@style/Widget.Material3.Button.Icon"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="30dp"
+            android:textStyle="bold"
+            android:backgroundTint="#1565C0"
+            android:layout_below="@+id/switch_sensors_speedGame"
+            android:layout_centerInParent="true"
+            android:text="show record"
+            />
+
+
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+</RelativeLayout>
