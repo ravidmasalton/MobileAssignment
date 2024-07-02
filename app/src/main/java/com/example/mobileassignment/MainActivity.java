@@ -1,19 +1,15 @@
 package com.example.mobileassignment;
 
-import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
-import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
-import android.view.LayoutInflater;
+import android.util.Log;
 import android.view.View;
-import android.view.WindowManager;
-import android.widget.Button;
-import android.widget.EditText;
+
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -37,8 +33,12 @@ public class MainActivity extends AppCompatActivity {
     private Handler handler = new Handler();
     private DetectorWithSensor moveDetector;
     private int fast_mode=0;
+    private int sensor=0;
     private boolean timerOn=false;
-    private  int delay = 1000;
+    private  int delay=1000;
+    private BackGroundSound backGroundSoundCoin;
+    private BackGroundSound backGroundSoundMine;
+
 
 
     @Override
@@ -48,38 +48,55 @@ public class MainActivity extends AppCompatActivity {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         setContentView(R.layout.activity_main);
         findViews();
+        initSound();
         gameManager = new GameManager(3);
-        initViews();
         updateLivesUI();
+        initViews();
+        Log.d("ttttp", "onCreate: ");
+        start();
     }
 
 
     protected void onResume() {
         super.onResume();
+        if(sensor==1)
+             moveDetector.start();
         start();
+
+
+
+
 
     }
 
     @Override
     protected void onPause() {
         super.onPause();
+        if (sensor==1)
+            moveDetector.stop();
         stop();
 
+
+
     }
+
+
+
+
     private void initViews() {
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
         if (extras != null) {
-            int sensor = extras.getInt("SENSOR", 0);
+            sensor = extras.getInt("SENSOR", 0);
             fast_mode = extras.getInt("FAST_MODE", 0);
             if (fast_mode == 1) {
                 delay = 500;
             }
+
             if (sensor == 1) {
                 game_BTN_left.setVisibility(View.INVISIBLE);
                 game_BTN_right.setVisibility(View.INVISIBLE);
                 initMoveDetector();
-                moveDetector.start();
             } else {
                 game_BTN_left.setOnClickListener(v -> updateCurrentLocationUIOfPlayer(0)); // left button
                 game_BTN_right.setOnClickListener(v -> updateCurrentLocationUIOfPlayer(1)); // right button
@@ -112,17 +129,16 @@ public class MainActivity extends AppCompatActivity {
 
 
             }
-
             @Override
             public void speedGameFaster() {
                 if (fast_mode==1){
                     stop();
-                    delay=300;
+                    delay=500;
                     start();
                 }
                 else{
                     stop();
-                    delay=500;
+                    delay=700;
                     start();
                 }
 
@@ -136,7 +152,8 @@ public class MainActivity extends AppCompatActivity {
         if (gameManager.checkCollisionWithMines()) {
             toast("boom");
             vibrator();
-            playSound(R.raw.police_siren3);
+            backGroundSoundMine.playSound();
+
             //hide mine image from screen when player hit it
             if (gameManager.getLives() == 0) {
                 lose();
@@ -145,7 +162,7 @@ public class MainActivity extends AppCompatActivity {
         }
         else if(gameManager.checkCollisionWithCoins()){
             gameManager.incrementScoreWithBag();
-            playSound(R.raw.coin_and_money_bag);
+            backGroundSoundCoin.playSound();
         }
         int row=gameManager.getROW()-1;
         int col=gameManager.getLocation();
@@ -169,6 +186,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void updateMines() { //Update mines on the matrix
+
         int[][] location_of_mines = gameManager.Update_mines();
         for (int i = 0; i < location_of_mines.length; i++) {
             for (int j = 0; j < location_of_mines[i].length; j++)
@@ -207,9 +225,10 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void start() {
+
         if(!timerOn) {
             timerOn=true;
-            handler.postDelayed(runnable, delay);
+            handler.postDelayed(runnable, 0);
         }
     }
 
@@ -316,14 +335,18 @@ public class MainActivity extends AppCompatActivity {
             v.vibrate(500);
         }
     }
-    private void playSound(int idSound) {
-        MediaPlayer mp = MediaPlayer.create(getApplicationContext(), idSound);
-        mp.start();
+
+    private void initSound(){
+        backGroundSoundMine=new BackGroundSound(this,R.raw.police_siren3);
+        backGroundSoundCoin=new BackGroundSound(this,R.raw.coin_and_money_bag);
+
 
     }
     private void lose() { //lose game
         stop();
         toast("You lose!!");
+        backGroundSoundMine.stopSound();
+        backGroundSoundCoin.stopSound();
         nextViews();
 
 

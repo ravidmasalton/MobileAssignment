@@ -4,6 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp"
+    android:background="#90CAF9"
     android:gravity="center">
 
     <com.google.android.material.textview.MaterialTextView
@@ -23,17 +24,30 @@
         android:textSize="48sp"
         android:textStyle="bold"/>
 
+    <EditText
+        android:id="@+id/usernameInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter your name"
+        android:inputType="textPersonName"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="24dp"/>
+
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnTable_of_records"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Table of records"
-        android:layout_marginTop="32dp"/>
+        android:backgroundTint="#212121"
+
+
+        android:layout_marginTop="16dp"/>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnPlayAgain"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Play Again"
-        android:layout_marginTop="32dp"/>
+        android:backgroundTint="#212121"
+        android:layout_marginTop="16dp"/>
 </LinearLayout>

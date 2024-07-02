@@ -60,14 +60,15 @@ public class DetectorWithSensor {
             }
 
 
-            if (y > 2.0) {
+            if (y <-2.0) {
                 if (speedCallback != null)
                     speedCallback.speedGameFaster();
-            } else if (y < -2.0) {
+            } else
                 if (speedCallback != null)
                     speedCallback.speedGameRegularSlow();
-            }
         }
+
+
 
     }
 

@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".OpenActivity"
-    android:background="@drawable/cops_and_thieves2">
+    android:background="@drawable/image_open">
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/main_LBL_title"
@@ -19,7 +19,7 @@
         android:textStyle="bold"
         android:layout_centerHorizontal="true"
         android:gravity="center"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="75dp"
         />
 
 
@@ -43,8 +43,10 @@
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="50dp"
             android:layout_centerHorizontal="true"
+            android:textColor="#212121"
             android:text="Sensors            "
-            android:textSize="30sp" />
+            android:textStyle="bold"
+            android:textSize="35sp" />
 
         <androidx.appcompat.widget.SwitchCompat
             android:id="@+id/switch_fast_mode"
@@ -53,8 +55,10 @@
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="50dp"
             android:layout_centerHorizontal="true"
+            android:textStyle="bold"
+            android:textColor="#212121"
             android:text="Fast mode        "
-            android:textSize="30sp" />
+            android:textSize="35sp" />
 
         <View
             android:layout_width="12dp"

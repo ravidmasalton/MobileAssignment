@@ -1,9 +1,12 @@
 package com.example.mobileassignment;
 
+import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.activity.EdgeToEdge;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SwitchCompat;
 
@@ -21,7 +24,9 @@ public class OpenActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_open);
+        getPermission();
         findViews();
+
         game_BTN_start_game.setOnClickListener(view -> clickStart());
     }
 
@@ -53,4 +58,31 @@ public class OpenActivity extends AppCompatActivity {
         game_SW_sensor = findViewById(R.id.switch_sensors);
         game_SW_fast_mode = findViewById(R.id.switch_fast_mode);
     }
+
+
+    void getPermission() {  // A message for the user to approve sharing a location
+        ActivityResultLauncher<String[]> locationPermissionRequest =
+                registerForActivityResult(new ActivityResultContracts
+                                .RequestMultiplePermissions(), result -> {
+                            Boolean fineLocationGranted = result.getOrDefault(
+                                    Manifest.permission.ACCESS_FINE_LOCATION, false);
+                            Boolean coarseLocationGranted = result.getOrDefault(
+                                    Manifest.permission.ACCESS_COARSE_LOCATION, false);
+                            if (fineLocationGranted != null && fineLocationGranted) {
+                                // Precise location access granted.
+                            } else if (coarseLocationGranted != null && coarseLocationGranted) {
+                                // Only approximate location access granted.
+                            } else {
+                                finish();
+                                // No location access granted.
+                            }
+                        }
+                );
+        locationPermissionRequest.launch(new String[]{
+                        Manifest.permission.ACCESS_FINE_LOCATION,
+                        Manifest.permission.ACCESS_COARSE_LOCATION});
+    }
+
+
+
 }
