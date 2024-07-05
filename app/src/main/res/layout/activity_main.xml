@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".View_controller.MainActivity">
 
 
     <androidx.appcompat.widget.AppCompatImageView
@@ -89,11 +89,11 @@
         android:id="@+id/playing_surface"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1"
         android:layout_above="@id/keysBTN_Left_Right"
         android:layout_below="@+id/main_LAY_heartLayout"
-        android:layout_marginTop="15dp"
-        android:layout_marginBottom="15dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginBottom="16dp"
+        android:layout_weight="1"
         android:orientation="vertical">
 
         <androidx.appcompat.widget.LinearLayoutCompat
@@ -101,8 +101,8 @@
             android:id="@+id/main_layout1"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
             android:layout_marginBottom="10dp"
+            android:layout_weight="1"
             android:orientation="horizontal">
 
             <androidx.appcompat.widget.AppCompatImageView
@@ -141,8 +141,8 @@
             android:id="@+id/main_layout2"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
             android:layout_marginBottom="10dp"
+            android:layout_weight="1"
             android:orientation="horizontal">
 
             <androidx.appcompat.widget.AppCompatImageView
@@ -184,8 +184,8 @@
             android:id="@+id/main_layout3"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
             android:layout_marginBottom="10dp"
+            android:layout_weight="1"
             android:orientation="horizontal">
 
             <androidx.appcompat.widget.AppCompatImageView
@@ -225,8 +225,8 @@
             android:id="@+id/main_layout4"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
             android:layout_marginBottom="10dp"
+            android:layout_weight="1"
             android:orientation="horizontal">
 
             <androidx.appcompat.widget.AppCompatImageView
@@ -240,6 +240,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1" />
+
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/main_IMG32"
                 android:layout_width="match_parent"
@@ -252,6 +253,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1" />
+
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/main_IMG34"
                 android:layout_width="match_parent"
@@ -266,8 +268,8 @@
             android:id="@+id/main_layout5"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
             android:layout_marginBottom="10dp"
+            android:layout_weight="1"
             android:orientation="horizontal">
 
             <androidx.appcompat.widget.AppCompatImageView
@@ -281,6 +283,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1" />
+
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/main_IMG42"
                 android:layout_width="match_parent"
@@ -293,6 +296,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1" />
+
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/main_IMG44"
                 android:layout_width="match_parent"
@@ -306,8 +310,8 @@
             android:id="@+id/main_layout6"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
             android:layout_marginBottom="10dp"
+            android:layout_weight="1"
             android:orientation="horizontal">
 
             <androidx.appcompat.widget.AppCompatImageView
@@ -321,6 +325,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1" />
+
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/main_IMG52"
                 android:layout_width="match_parent"
@@ -333,11 +338,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1" />
+
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/main_IMG54"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1" />
+
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -360,6 +367,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1" />
+
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/main_IMG62"
                 android:layout_width="match_parent"
@@ -372,6 +380,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1" />
+
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/main_IMG64"
                 android:layout_width="match_parent"
@@ -381,15 +390,55 @@
 
 
 
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/main_layout8"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_IMG70"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_IMG71"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_IMG72"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_IMG73"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_IMG74"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 
 
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="55dp"
         android:layout_above="@+id/keysBTN_Left_Right"
-        android:layout_marginBottom="15dp"
+        android:layout_marginBottom="10dp"
         android:orientation="horizontal">
 
         <androidx.appcompat.widget.AppCompatImageView

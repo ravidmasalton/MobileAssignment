@@ -1,4 +1,4 @@
-package com.example.mobileassignment;
+package com.example.mobileassignment.Fragment;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.mobileassignment.R;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -33,9 +34,8 @@ public class MapFragment extends Fragment {
          */
         @Override
         public void onMapReady(GoogleMap googleMap) {
-            LatLng sydney = new LatLng(-34, 151);
+            LatLng sydney = new LatLng(31.771959, 35.217018);
             map = googleMap;
-            map .addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
             map.moveCamera(CameraUpdateFactory.newLatLng(sydney));
         }
     };
@@ -45,6 +45,8 @@ public class MapFragment extends Fragment {
         LatLng sydney = new LatLng(latitude, longitude);
         if (map != null) {
             map.addMarker(new MarkerOptions().position(sydney).title("new player location"));
+            map.animateCamera(CameraUpdateFactory.newLatLngZoom(sydney, 17.0f));
+
         }
 
 

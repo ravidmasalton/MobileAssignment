@@ -1,13 +1,12 @@
-package com.example.mobileassignment;
+package com.example.mobileassignment.Logic;
 
-import java.util.ArrayList;
 import java.util.Random;
 
 public class GameManager {
     private int lives = 3;
     private int score = 0;
     private int currunt_location_User;
-    private final int ROW=7; //row-1 because the line of the player
+    private final int ROW=8; //row-1 because the line of the player
     private final int COLUMN=5;
     private Random random = new Random();
     private int [][]all_mine;

@@ -1,4 +1,4 @@
-package com.example.mobileassignment;
+package com.example.mobileassignment.View_controller;
 
 import android.content.Context;
 import android.content.Intent;
@@ -17,6 +17,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.AppCompatImageView;
 
+import com.example.mobileassignment.Utilities.BackGroundSound;
+import com.example.mobileassignment.Utilities.DetectorWithSensor;
+import com.example.mobileassignment.Logic.GameManager;
+import com.example.mobileassignment.Interfaces.MoveCallbackWithSensor;
+import com.example.mobileassignment.R;
+import com.example.mobileassignment.Interfaces.SpeedCallbackWithSensor;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textview.MaterialTextView;
 
@@ -80,9 +86,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-
-
-
     private void initViews() {
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
@@ -115,31 +118,25 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }, new SpeedCallbackWithSensor() {
             @Override
-            public void speedGameRegularSlow() {
+            public void speedBeSlow() {
                 if (fast_mode==1){
-                    stop();
                     delay=700;
-                    start();
                 }
                 else{
-                    stop();
                     delay=1200;
-                    start();
                 }
 
 
             }
             @Override
-            public void speedGameFaster() {
+            public void speedBeFast() {
                 if (fast_mode==1){
-                    stop();
-                    delay=500;
-                    start();
+
+                    delay=300;
                 }
                 else{
-                    stop();
-                    delay=700;
-                    start();
+                    delay=500;
+
                 }
 
             }
@@ -169,13 +166,7 @@ public class MainActivity extends AppCompatActivity {
         game_IMG_surface[row][col].setImageResource(0);
         game_LBL_score.setText(String.valueOf(gameManager.getScore()));
 
-
-
-
-
-
     }
-
 
 
     private void gameLoop() {
@@ -301,6 +292,13 @@ public class MainActivity extends AppCompatActivity {
                  findViewById(R.id.main_IMG62),
                  findViewById(R.id.main_IMG63),
                  findViewById(R.id.main_IMG64)},
+
+
+                {findViewById(R.id.main_IMG70),
+                 findViewById(R.id.main_IMG71),
+                 findViewById(R.id.main_IMG72),
+                 findViewById(R.id.main_IMG73),
+                 findViewById(R.id.main_IMG74)},
 
         };
 

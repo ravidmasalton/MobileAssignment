@@ -6,7 +6,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".OpenActivity"
+    tools:context=".View_controller.OpenActivity"
     android:background="@drawable/image_open">
 
     <com.google.android.material.textview.MaterialTextView
@@ -19,7 +19,7 @@
         android:textStyle="bold"
         android:layout_centerHorizontal="true"
         android:gravity="center"
-        android:layout_marginTop="75dp"
+        android:layout_marginTop="70dp"
         />
 
 
@@ -36,8 +36,7 @@
         android:gravity="center"
         android:orientation="vertical">
 
-        <androidx.appcompat.widget.SwitchCompat
-            android:id="@+id/switch_sensors"
+        <com.google.android.material.materialswitch.MaterialSwitch            android:id="@+id/switch_sensors"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
@@ -46,10 +45,9 @@
             android:textColor="#212121"
             android:text="Sensors            "
             android:textStyle="bold"
-            android:textSize="35sp" />
+            android:textSize="40sp" />
 
-        <androidx.appcompat.widget.SwitchCompat
-            android:id="@+id/switch_fast_mode"
+        <com.google.android.material.materialswitch.MaterialSwitch            android:id="@+id/switch_fast_mode"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
@@ -58,7 +56,8 @@
             android:textStyle="bold"
             android:textColor="#212121"
             android:text="Fast mode        "
-            android:textSize="35sp" />
+            android:textSize="40sp"
+            tools:ignore="UseSwitchCompatOrMaterialXml"/>
 
         <View
             android:layout_width="12dp"
@@ -98,3 +97,5 @@
 
 
 </RelativeLayout>
+
+

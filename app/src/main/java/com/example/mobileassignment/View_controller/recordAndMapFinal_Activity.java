@@ -1,10 +1,14 @@
-package com.example.mobileassignment;
+package com.example.mobileassignment.View_controller;
 
 import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.mobileassignment.Interfaces.GetLocationByScore;
+import com.example.mobileassignment.Fragment.ListFragment;
+import com.example.mobileassignment.Fragment.MapFragment;
+import com.example.mobileassignment.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class recordAndMapFinal_Activity extends AppCompatActivity {

@@ -6,7 +6,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".recordAndMapFinal_Activity"
+    tools:context=".View_controller.recordAndMapFinal_Activity"
     android:orientation="vertical"
     android:keepScreenOn="true">
 
@@ -36,6 +36,8 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="Table of records"
+            android:textColor="#212121"
+            android:background="#FAFAFA"
             android:textSize="30sp"/>
     </LinearLayout>
 

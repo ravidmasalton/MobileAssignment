@@ -20,7 +20,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal"
-            android:padding="8dp">
+            android:padding="8dp"
+            android:background="#81D4FA">
+
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/score_LBL_name"
@@ -28,9 +30,11 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:maxLines="1"
-                android:textSize="16sp"
+                android:textSize="20sp"
                 android:textStyle="bold"
+                android:textColor="#212121"
                 android:background="#81D4FA"
+
                 android:text="Name" />
 
             <com.google.android.material.textview.MaterialTextView
@@ -39,10 +43,11 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:maxLines="1"
-                android:textSize="16sp"
+                android:textSize="20sp"
                 android:textStyle="bold"
+                android:textColor="#212121"
                 android:background="#81D4FA"
-                android:text="Score" />
+                android:text=" Score" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 

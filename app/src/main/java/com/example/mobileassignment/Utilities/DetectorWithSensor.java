@@ -1,10 +1,13 @@
-package com.example.mobileassignment;
+package com.example.mobileassignment.Utilities;
 
 import android.content.Context;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+
+import com.example.mobileassignment.Interfaces.MoveCallbackWithSensor;
+import com.example.mobileassignment.Interfaces.SpeedCallbackWithSensor;
 
 
 public class DetectorWithSensor {
@@ -47,7 +50,7 @@ public class DetectorWithSensor {
     }
 
     private void calculateMove(float x,float y) {
-        if (System.currentTimeMillis() - timestamp > 500) {
+        if (System.currentTimeMillis() - timestamp > 300) {
             timestamp = System.currentTimeMillis();
             if (x > 2.0) {
                 if (moveCallback != null) {
@@ -60,12 +63,12 @@ public class DetectorWithSensor {
             }
 
 
-            if (y <-2.0) {
+            if (y <-0.5) {
                 if (speedCallback != null)
-                    speedCallback.speedGameFaster();
+                    speedCallback.speedBeFast();
             } else
                 if (speedCallback != null)
-                    speedCallback.speedGameRegularSlow();
+                    speedCallback.speedBeSlow();
         }
 
 

@@ -1,4 +1,4 @@
-package com.example.mobileassignment;
+package com.example.mobileassignment.Fragment;
 
 import android.os.Bundle;
 
@@ -9,6 +9,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.example.mobileassignment.Interfaces.GetLocationByScore;
+import com.example.mobileassignment.Interfaces.ScoreClickedCallback;
+import com.example.mobileassignment.Utilities.MSPV3;
+import com.example.mobileassignment.R;
+import com.example.mobileassignment.Adapter.ScoreAdaper;
+import com.example.mobileassignment.Logic.ScoreUser;
 
 import java.util.ArrayList;
 

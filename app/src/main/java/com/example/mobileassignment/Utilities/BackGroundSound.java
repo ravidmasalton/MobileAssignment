@@ -1,4 +1,4 @@
-package com.example.mobileassignment;
+package com.example.mobileassignment.Utilities;
 
 import android.content.Context;
 import android.media.MediaPlayer;

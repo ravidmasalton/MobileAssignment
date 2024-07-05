@@ -1,4 +1,4 @@
-package com.example.mobileassignment;
+package com.example.mobileassignment.View_controller;
 
 import android.Manifest;
 import android.content.Intent;
@@ -10,6 +10,7 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SwitchCompat;
 
+import com.example.mobileassignment.R;
 import com.google.android.material.button.MaterialButton;
 
 public class OpenActivity extends AppCompatActivity {
@@ -28,6 +29,19 @@ public class OpenActivity extends AppCompatActivity {
         findViews();
 
         game_BTN_start_game.setOnClickListener(view -> clickStart());
+        game_BTN_show_record.setOnClickListener(view -> clickTableOfRecord());
+
+    }
+
+    private void clickTableOfRecord() {
+        initViewsToRecord();
+    }
+
+    private void initViewsToRecord() {
+        Intent mainActivityIntent = new Intent(getApplicationContext(), recordAndMapFinal_Activity.class);
+
+        startActivity(mainActivityIntent);
+        finish();
     }
 
     private void clickStart() {
@@ -39,10 +53,10 @@ public class OpenActivity extends AppCompatActivity {
         if (game_SW_fast_mode.isChecked())
             fast_mode = 1;
 
-        initViews(sensor, fast_mode);
+        initViewsToStartGame(sensor, fast_mode);
     }
 
-    private void initViews(int sensor, int fast_mode) {
+    private void initViewsToStartGame(int sensor, int fast_mode) {
         Intent mainActivityIntent = new Intent(getApplicationContext(), MainActivity.class);
         Bundle bundle = new Bundle();
         bundle.putInt("SENSOR", sensor);

@@ -1,19 +1,25 @@
-package com.example.mobileassignment;
+package com.example.mobileassignment.View_controller;
 
 import android.Manifest;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
+import android.text.InputType;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.example.mobileassignment.Utilities.MSPV3;
+import com.example.mobileassignment.R;
+import com.example.mobileassignment.Logic.ScoreUser;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -32,7 +38,7 @@ public class LoseGameActivity extends AppCompatActivity {
     private MaterialTextView game_LBL_score;
     private MaterialButton playAgain;
     private MaterialButton table_of_records;
-    private EditText usernameInput;
+    private String usernameInput;
     private int score;
     private FusedLocationProviderClient locationOfUser;
     private double latitude;
@@ -64,6 +70,8 @@ public class LoseGameActivity extends AppCompatActivity {
             getUserLocation();
         }
 
+        showEnterNameDialog();
+
         // Set the Play Again button click listener
         playAgain.setOnClickListener(view -> handlePlayAgain());
 
@@ -71,23 +79,55 @@ public class LoseGameActivity extends AppCompatActivity {
         table_of_records.setOnClickListener(view -> handleTableOfRecords());
     }
 
+    private void showEnterNameDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Enter Your Name");
+
+        // Set up the input
+        final EditText input = new EditText(this);
+        input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PERSON_NAME);
+        builder.setView(input);
+
+        // Set up the buttons
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                String name = input.getText().toString();
+                if (!name.isEmpty()) {
+                    usernameInput=name;
+                } else {
+                    Toast.makeText(LoseGameActivity.this, "Name cannot be empty", Toast.LENGTH_SHORT).show();
+                    showEnterNameDialog(); // Show the dialog again if the input was empty
+                }
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                showEnterNameDialog();
+            }
+        });
+
+        builder.show();
+    }
+
     private void handlePlayAgain() {
-        String username = usernameInput.getText().toString().trim();
-        if (username.isEmpty()) {
+        if (usernameInput==null ||usernameInput.isEmpty()) {
             Toast.makeText(this, "Username cannot be empty", Toast.LENGTH_SHORT).show();
+            showEnterNameDialog();
         } else {
             saveUserNameAndScore();
             Intent playAgainIntent = new Intent(getApplicationContext(), OpenActivity.class);
-            playAgainIntent.putExtra("username", username);
+            playAgainIntent.putExtra("username", usernameInput);
             startActivity(playAgainIntent);
             finish();
         }
     }
 
     private void handleTableOfRecords() {
-        String username = usernameInput.getText().toString().trim();
-        if (username.isEmpty()) {
+        if (usernameInput==null ||usernameInput.isEmpty()) {
             Toast.makeText(this, "Username cannot be empty", Toast.LENGTH_SHORT).show();
+            showEnterNameDialog();
         } else {
             saveUserNameAndScore();
             Intent recordsIntent = new Intent(getApplicationContext(), recordAndMapFinal_Activity.class);
@@ -100,13 +140,7 @@ public class LoseGameActivity extends AppCompatActivity {
         MSPV3 mspv3 = MSPV3.getInstance();
         ArrayList<ScoreUser> scores = mspv3.readScoreList();
 
-        // Check if location was obtained
-        if (latitude == 0 && longitude == 0) {
-            Toast.makeText(this, "Location not obtained", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        scores.add(new ScoreUser(usernameInput.getText().toString(), score, longitude, latitude));
+        scores.add(new ScoreUser(usernameInput, score, longitude, latitude));
         Collections.sort(scores);
         mspv3.saveListOfScore(scores);
     }
@@ -116,7 +150,6 @@ public class LoseGameActivity extends AppCompatActivity {
         game_LBL_score = findViewById(R.id.scoreValue);
         playAgain = findViewById(R.id.btnPlayAgain);
         table_of_records = findViewById(R.id.btnTable_of_records);
-        usernameInput = findViewById(R.id.usernameInput);
     }
 
     private void getUserLocation() {

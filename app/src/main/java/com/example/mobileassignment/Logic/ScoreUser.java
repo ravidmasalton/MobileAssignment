@@ -1,4 +1,4 @@
-package com.example.mobileassignment;
+package com.example.mobileassignment.Logic;
 
 public class ScoreUser implements Comparable<ScoreUser>               {
     private String name="";

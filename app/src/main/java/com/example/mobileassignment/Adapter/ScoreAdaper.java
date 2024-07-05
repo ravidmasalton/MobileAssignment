@@ -1,6 +1,5 @@
-package com.example.mobileassignment;
+package com.example.mobileassignment.Adapter;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +7,9 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.mobileassignment.Interfaces.ScoreClickedCallback;
+import com.example.mobileassignment.R;
+import com.example.mobileassignment.Logic.ScoreUser;
 import com.google.android.material.textview.MaterialTextView;
 
 import java.util.ArrayList;
@@ -17,7 +19,6 @@ public class ScoreAdaper extends RecyclerView.Adapter<ScoreAdaper.ScoreViewHolde
     private ScoreClickedCallback scoreCallback;
 
     public ScoreAdaper(ArrayList<ScoreUser> scores) {
-        this.scoreCallback = scoreCallback;
         this.scores=scores;
     }
 
@@ -43,7 +44,11 @@ public class ScoreAdaper extends RecyclerView.Adapter<ScoreAdaper.ScoreViewHolde
 
     @Override
     public int getItemCount() {
-         return scores == null ? 0 : scores.size();
+        if (scores == null)
+            return 0;
+        else if (scores.size() > 10)
+            return 10;
+        return scores.size();
     }
 
     public ScoreUser getItem(int position) {
