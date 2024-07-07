@@ -38,13 +38,12 @@ public class MainActivity extends AppCompatActivity {
     private GameManager gameManager;
     private Handler handler = new Handler();
     private DetectorWithSensor moveDetector;
-    private int fast_mode=0;
-    private int sensor=0;
-    private boolean timerOn=false;
-    private  int delay=1000;
+    private int fast_mode = 0;
+    private int sensor = 0;
+    private boolean timerOn = false;
+    private int delay = 1000;
     private BackGroundSound backGroundSoundCoin;
     private BackGroundSound backGroundSoundMine;
-
 
 
     @Override
@@ -65,12 +64,9 @@ public class MainActivity extends AppCompatActivity {
 
     protected void onResume() {
         super.onResume();
-        if(sensor==1)
-             moveDetector.start();
+        if (sensor == 1)
+            moveDetector.start();
         start();
-
-
-
 
 
     }
@@ -78,10 +74,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        if (sensor==1)
+        if (sensor == 1)
             moveDetector.stop();
         stop();
-
 
 
     }
@@ -119,30 +114,27 @@ public class MainActivity extends AppCompatActivity {
                 }, new SpeedCallbackWithSensor() {
             @Override
             public void speedBeSlow() {
-                if (fast_mode==1){
-                    delay=700;
-                }
-                else{
-                    delay=1200;
+                if (fast_mode == 1) {
+                    delay = 1000;
+                } else {
+                    delay = 1200;
                 }
 
 
             }
+
             @Override
             public void speedBeFast() {
-                if (fast_mode==1){
-
-                    delay=300;
-                }
-                else{
-                    delay=500;
+                if (fast_mode == 1) {
+                    delay = 300;
+                } else {
+                    delay = 500;
 
                 }
 
             }
         });
     }
-
 
 
     private void checkCollision() { //check if player hit a mine
@@ -156,13 +148,12 @@ public class MainActivity extends AppCompatActivity {
                 lose();
             }
             updateLivesUI();
-        }
-        else if(gameManager.checkCollisionWithCoins()){
+        } else if (gameManager.checkCollisionWithCoins()) {
             gameManager.incrementScoreWithBag();
             backGroundSoundCoin.playSound();
         }
-        int row=gameManager.getROW()-1;
-        int col=gameManager.getLocation();
+        int row = gameManager.getROW() - 1;
+        int col = gameManager.getLocation();
         game_IMG_surface[row][col].setImageResource(0);
         game_LBL_score.setText(String.valueOf(gameManager.getScore()));
 
@@ -173,6 +164,7 @@ public class MainActivity extends AppCompatActivity {
         updateMines();
         gameManager.incrementScore();
         checkCollision();
+        Log.d("ttttp",delay+" ");
 
     }
 
@@ -183,13 +175,11 @@ public class MainActivity extends AppCompatActivity {
             for (int j = 0; j < location_of_mines[i].length; j++)
                 if (location_of_mines[i][j] == 1) {
                     game_IMG_surface[i][j].setImageResource(R.drawable.police_car);
-                }
-            else if(location_of_mines[i][j] == 2){
-                game_IMG_surface[i][j].setImageResource(R.drawable.bag_of_money);
-                }
-                else if (location_of_mines[i][j] == 0) {
+                } else if (location_of_mines[i][j] == 2) {
+                    game_IMG_surface[i][j].setImageResource(R.drawable.bag_of_money);
+                } else if (location_of_mines[i][j] == 0) {
                     game_IMG_surface[i][j].setImageResource(0);
-            }
+                }
         }
     }
 
@@ -217,8 +207,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void start() {
 
-        if(!timerOn) {
-            timerOn=true;
+        if (!timerOn) {
+            timerOn = true;
             handler.postDelayed(runnable, 0);
         }
     }
@@ -232,7 +222,7 @@ public class MainActivity extends AppCompatActivity {
     };
 
     private void stop() {
-        timerOn=false;
+        timerOn = false;
         handler.removeCallbacks(runnable);
 
     }
@@ -250,55 +240,55 @@ public class MainActivity extends AppCompatActivity {
         game_IMG_surface = new AppCompatImageView[][]{
 
                 {findViewById(R.id.main_IMG00),
-                 findViewById(R.id.main_IMG01),
-                 findViewById(R.id.main_IMG02),
-                 findViewById(R.id.main_IMG03),
-                 findViewById(R.id.main_IMG04)},
+                        findViewById(R.id.main_IMG01),
+                        findViewById(R.id.main_IMG02),
+                        findViewById(R.id.main_IMG03),
+                        findViewById(R.id.main_IMG04)},
 
 
                 {findViewById(R.id.main_IMG10),
-                 findViewById(R.id.main_IMG11),
-                 findViewById(R.id.main_IMG12),
-                 findViewById(R.id.main_IMG13),
-                 findViewById(R.id.main_IMG14)},
+                        findViewById(R.id.main_IMG11),
+                        findViewById(R.id.main_IMG12),
+                        findViewById(R.id.main_IMG13),
+                        findViewById(R.id.main_IMG14)},
 
 
                 {findViewById(R.id.main_IMG20),
-                 findViewById(R.id.main_IMG21),
-                 findViewById(R.id.main_IMG22),
-                 findViewById(R.id.main_IMG23),
-                 findViewById(R.id.main_IMG24)},
+                        findViewById(R.id.main_IMG21),
+                        findViewById(R.id.main_IMG22),
+                        findViewById(R.id.main_IMG23),
+                        findViewById(R.id.main_IMG24)},
 
                 {findViewById(R.id.main_IMG30),
-                 findViewById(R.id.main_IMG31),
-                 findViewById(R.id.main_IMG32),
-                 findViewById(R.id.main_IMG33),
-                 findViewById(R.id.main_IMG34)},
+                        findViewById(R.id.main_IMG31),
+                        findViewById(R.id.main_IMG32),
+                        findViewById(R.id.main_IMG33),
+                        findViewById(R.id.main_IMG34)},
 
                 {findViewById(R.id.main_IMG40),
-                 findViewById(R.id.main_IMG41),
-                 findViewById(R.id.main_IMG42),
-                 findViewById(R.id.main_IMG43),
-                 findViewById(R.id.main_IMG44)},
+                        findViewById(R.id.main_IMG41),
+                        findViewById(R.id.main_IMG42),
+                        findViewById(R.id.main_IMG43),
+                        findViewById(R.id.main_IMG44)},
 
                 {findViewById(R.id.main_IMG50),
-                 findViewById(R.id.main_IMG51),
-                 findViewById(R.id.main_IMG52),
-                 findViewById(R.id.main_IMG53),
-                 findViewById(R.id.main_IMG54)},
+                        findViewById(R.id.main_IMG51),
+                        findViewById(R.id.main_IMG52),
+                        findViewById(R.id.main_IMG53),
+                        findViewById(R.id.main_IMG54)},
 
                 {findViewById(R.id.main_IMG60),
-                 findViewById(R.id.main_IMG61),
-                 findViewById(R.id.main_IMG62),
-                 findViewById(R.id.main_IMG63),
-                 findViewById(R.id.main_IMG64)},
+                        findViewById(R.id.main_IMG61),
+                        findViewById(R.id.main_IMG62),
+                        findViewById(R.id.main_IMG63),
+                        findViewById(R.id.main_IMG64)},
 
 
                 {findViewById(R.id.main_IMG70),
-                 findViewById(R.id.main_IMG71),
-                 findViewById(R.id.main_IMG72),
-                 findViewById(R.id.main_IMG73),
-                 findViewById(R.id.main_IMG74)},
+                        findViewById(R.id.main_IMG71),
+                        findViewById(R.id.main_IMG72),
+                        findViewById(R.id.main_IMG73),
+                        findViewById(R.id.main_IMG74)},
 
         };
 
@@ -334,12 +324,13 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void initSound(){
-        backGroundSoundMine=new BackGroundSound(this,R.raw.police_siren3);
-        backGroundSoundCoin=new BackGroundSound(this,R.raw.coin_and_money_bag);
+    private void initSound() {
+        backGroundSoundMine = new BackGroundSound(this, R.raw.police_siren3);
+        backGroundSoundCoin = new BackGroundSound(this, R.raw.coin_and_money_bag);
 
 
     }
+
     private void lose() { //lose game
         stop();
         toast("You lose!!");
@@ -353,20 +344,11 @@ public class MainActivity extends AppCompatActivity {
     private void nextViews() {
         Intent mainActivityIntent = new Intent(getApplicationContext(), LoseGameActivity.class);
         Bundle bundle = new Bundle();
-        bundle.putInt("score",gameManager.getScore());
+        bundle.putInt("score", gameManager.getScore());
         mainActivityIntent.putExtras(bundle);
         startActivity(mainActivityIntent);
         finish();
     }
-
-
-
-
-
-
-
-
-
 
 
 }

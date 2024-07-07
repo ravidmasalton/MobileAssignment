@@ -94,7 +94,7 @@ public class LoseGameActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
                 String name = input.getText().toString();
                 if (!name.isEmpty()) {
-                    usernameInput=name;
+                    usernameInput = name;
                 } else {
                     Toast.makeText(LoseGameActivity.this, "Name cannot be empty", Toast.LENGTH_SHORT).show();
                     showEnterNameDialog(); // Show the dialog again if the input was empty
@@ -112,7 +112,7 @@ public class LoseGameActivity extends AppCompatActivity {
     }
 
     private void handlePlayAgain() {
-        if (usernameInput==null ||usernameInput.isEmpty()) {
+        if (usernameInput == null || usernameInput.isEmpty()) {
             Toast.makeText(this, "Username cannot be empty", Toast.LENGTH_SHORT).show();
             showEnterNameDialog();
         } else {
@@ -125,7 +125,7 @@ public class LoseGameActivity extends AppCompatActivity {
     }
 
     private void handleTableOfRecords() {
-        if (usernameInput==null ||usernameInput.isEmpty()) {
+        if (usernameInput == null || usernameInput.isEmpty()) {
             Toast.makeText(this, "Username cannot be empty", Toast.LENGTH_SHORT).show();
             showEnterNameDialog();
         } else {

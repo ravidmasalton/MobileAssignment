@@ -7,10 +7,10 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
 public class BackGroundSound {
-    private  Context context;
+    private Context context;
     private Executor executor;
     private MediaPlayer mediaPlayer;
-    private  int resID;
+    private int resID;
 
     public BackGroundSound(Context context, int resID) {
         this.context = context;

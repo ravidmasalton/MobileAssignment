@@ -25,7 +25,7 @@ public class recordAndMapFinal_Activity extends AppCompatActivity {
         listFragment.setCallbackGetLocationByScore(new GetLocationByScore() {
             @Override
             public void getLocationByScore(double lat, double lng) {
-                mapFragment.addLocation(lat,lng);
+                mapFragment.addLocation(lat, lng);
 
             }
         });
@@ -37,8 +37,6 @@ public class recordAndMapFinal_Activity extends AppCompatActivity {
                 .add(R.id.main_LAY_top, listFragment)
                 .add(R.id.main_LAY_bottom, mapFragment)
                 .commit();
-
-
 
 
     }

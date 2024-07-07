@@ -40,16 +40,16 @@ public class MSPV3 {
         editor.apply();
     }
 
-    public  ArrayList<ScoreUser> readScoreList() {
+    public ArrayList<ScoreUser> readScoreList() {
         String json = prefs.getString(SCORELIST, "");
         ArrayList<ScoreUser> newScoreList = new ArrayList<>();
-        TypeToken<ArrayList<ScoreUser>> token = new TypeToken<ArrayList<ScoreUser>>() {};
+        TypeToken<ArrayList<ScoreUser>> token = new TypeToken<ArrayList<ScoreUser>>() {
+        };
         if (json.equals("")) {
             return newScoreList;
         }
         return new Gson().fromJson(json, token.getType());
     }
-
 
 
 }

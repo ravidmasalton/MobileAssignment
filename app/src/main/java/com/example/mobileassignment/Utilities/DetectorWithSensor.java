@@ -21,15 +21,13 @@ public class DetectorWithSensor {
     private MoveCallbackWithSensor moveCallback;
     private SpeedCallbackWithSensor speedCallback;
 
-    public DetectorWithSensor(Context context, MoveCallbackWithSensor moveCallback,SpeedCallbackWithSensor speedCallback) {
+    public DetectorWithSensor(Context context, MoveCallbackWithSensor moveCallback, SpeedCallbackWithSensor speedCallback) {
         this.sensorManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
         sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         this.moveCallback = moveCallback;
-        this.speedCallback=speedCallback;
+        this.speedCallback = speedCallback;
         initEventListener();
     }
-
-
 
 
     private void initEventListener() {
@@ -39,7 +37,7 @@ public class DetectorWithSensor {
                 float x = event.values[0];
                 float y = event.values[1];
 
-                calculateMove(x,y);
+                calculateMove(x, y);
             }
 
             @Override
@@ -49,7 +47,7 @@ public class DetectorWithSensor {
         };
     }
 
-    private void calculateMove(float x,float y) {
+    private void calculateMove(float x, float y) {
         if (System.currentTimeMillis() - timestamp > 300) {
             timestamp = System.currentTimeMillis();
             if (x > 2.0) {
@@ -63,23 +61,18 @@ public class DetectorWithSensor {
             }
 
 
-            if (y <-0.5) {
-                if (speedCallback != null)
-                    speedCallback.speedBeFast();
-            } else
+            if (y > 1) {
                 if (speedCallback != null)
                     speedCallback.speedBeSlow();
+            } else if (speedCallback != null)
+                    speedCallback.speedBeFast();
         }
-
 
 
     }
 
 
-
-
-
-    public void start(){
+    public void start() {
         sensorManager.registerListener(
                 sensorEventListener,
                 sensor,
@@ -87,7 +80,7 @@ public class DetectorWithSensor {
         );
     }
 
-    public void stop(){
+    public void stop() {
         sensorManager.unregisterListener(
                 sensorEventListener,
                 sensor

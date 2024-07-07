@@ -14,12 +14,12 @@ import com.google.android.material.textview.MaterialTextView;
 
 import java.util.ArrayList;
 
-public class ScoreAdaper extends RecyclerView.Adapter<ScoreAdaper.ScoreViewHolder>{
+public class ScoreAdaper extends RecyclerView.Adapter<ScoreAdaper.ScoreViewHolder> {
     private ArrayList<ScoreUser> scores;
     private ScoreClickedCallback scoreCallback;
 
     public ScoreAdaper(ArrayList<ScoreUser> scores) {
-        this.scores=scores;
+        this.scores = scores;
     }
 
     public ScoreAdaper setScoreCallBack(ScoreClickedCallback scoreCallBack) {
@@ -59,7 +59,6 @@ public class ScoreAdaper extends RecyclerView.Adapter<ScoreAdaper.ScoreViewHolde
 
         private MaterialTextView score_LBL_name;
         private MaterialTextView score_LBL_score;
-
 
 
         public ScoreViewHolder(@NonNull View itemView) {

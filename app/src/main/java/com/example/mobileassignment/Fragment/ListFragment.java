@@ -23,7 +23,7 @@ import java.util.ArrayList;
 public class ListFragment extends Fragment {
     private RecyclerView recyclerView_LST_scores;
     private ArrayList<ScoreUser> scores;
-    private GetLocationByScore getLocationByScore ;
+    private GetLocationByScore getLocationByScore;
 
 
     public ListFragment() {
@@ -33,7 +33,7 @@ public class ListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view =inflater.inflate(R.layout.fragment_list, container, false);
+        View view = inflater.inflate(R.layout.fragment_list, container, false);
         findViews(view);
         MSPV3 manager = MSPV3.getInstance();
         scores = manager.readScoreList();
@@ -42,6 +42,7 @@ public class ListFragment extends Fragment {
 
         return view;
     }
+
     public void setCallbackGetLocationByScore(GetLocationByScore getLocationByScore) {
         this.getLocationByScore = getLocationByScore;
     }
@@ -49,6 +50,7 @@ public class ListFragment extends Fragment {
     private void findViews(View view) {
         this.recyclerView_LST_scores = view.findViewById(R.id.recyclerView_LST_scores);
     }
+
     private void initViews(View view) {
         ScoreAdaper scoreAdapter = new ScoreAdaper(scores);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(view.getContext());

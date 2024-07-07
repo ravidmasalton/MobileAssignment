@@ -41,14 +41,13 @@ public class MapFragment extends Fragment {
     };
 
 
-    public void addLocation(double latitude, double longitude){
+    public void addLocation(double latitude, double longitude) {
         LatLng sydney = new LatLng(latitude, longitude);
         if (map != null) {
             map.addMarker(new MarkerOptions().position(sydney).title("new player location"));
             map.animateCamera(CameraUpdateFactory.newLatLngZoom(sydney, 17.0f));
 
         }
-
 
 
     }
