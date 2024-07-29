@@ -35,7 +35,7 @@
         -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyCQpyU5AxPt0U2N2blMzjpPAFXsjfBdGls" />
+            android:value="my code" />
 
         <activity
             android:name=".View_controller.recordAndMapFinal_Activity"
